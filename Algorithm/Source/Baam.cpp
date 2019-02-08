@@ -1,5 +1,5 @@
 #include "Baam.h"
-using namespace std;
+
 /*
 첫째 줄에 보드의 크기 N이 주어진다. (2 ≤ N ≤ 100) 다음 줄에 사과의 개수 K가 주어진다. (0 ≤ K ≤ 100)
 다음 K개의 줄에는 사과의 위치가 주어지는데, 첫 번째 정수는 행, 두 번째 정수는 열 위치를 의미한다. 사과의
@@ -30,54 +30,45 @@ using namespace std;
 
 
 
-class Baam {
-
-    vector<vector<int>> bMap;
-    int N = 0, K = 0;
-    vector<pair<int, int>> applePos;
-    int L = 0;
-    vector<pair<int, int>> actionQueue;
-
-    void Input() // 입력을 받는다.
+void Baam::Input() // 입력을 받는다.
+{
+    scanf_s("%d %d", &N, &K);
+    for (int i = 0; i < K; ++i)
     {
-        scanf_s("%d %d", &N, &K);
-        for (int i = 0; i < K; ++i)
-        {
-            int x, y;
-            scanf_s("%d %d", &x, &y);
-            applePos.push_back(pair<int, int>(x, y));
-        }
-        scanf_s("%d", &L);
-        for (int i = 0; i < L; ++i)
-        {
-            int X, C;
-            scanf_s("%d %d", &X, &C);
-            actionQueue.push_back(pair<int, int>(X, C));
-        }
+        int x, y;
+        scanf_s("%d %d", &x, &y);
+        applePos.push_back(pair<int, int>(x, y));
+    }
+    scanf_s("%d", &L);
+    for (int i = 0; i < L; ++i)
+    {
+        int X, C;
+        scanf_s("%d %d", &X, &C);
+        actionQueue.push_back(pair<int, int>(X, C));
+    }
 
-        // 초기화
-        for (int j=0; j <= N + 1; j++)
+    // 초기화
+    for (int j = 0; j <= N + 1; j++)
+    {
+        vector<int> row;
+        for (int i = 0; i <= N + 1; i++)
         {
-            vector<int> row;
-            for (int i=0; i <= N + 1; i++)
+            if (j == 0 || i == 0 || j == N + 1 || i == N + 1)
             {
-                if (j == 0 || i == 0 || j == N + 1 || i == N + 1)
-                {
-                    row.push_back(i);
-                }
+                row.push_back(i);
             }
-            bMap.push_back(row);
         }
+        bMap.push_back(row);
     }
+}
 
-    void Solve() 
-    {
-        
-    }
+void Baam::Solve()
+{
 
-    void DoSelf()
-    {
-        Input();
-        Solve();
-    }
-};
+}
+
+void Baam::DoSelf()
+{
+    Input();
+    Solve();
+}
